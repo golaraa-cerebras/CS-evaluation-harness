@@ -115,6 +115,11 @@ lm_eval --model cerebras-completions \
 | `drop` | Discrete reasoning over paragraphs | 3 |
 | `humaneval` | Python code generation | 0 |
 | `mbpp` | Python programming problems | 3 |
+| `hendrycks_math` | Competition-level math | 4 |
+| `aime24`, `aime25` | AIME math olympiad | 0 |
+| `truthfulqa_gen` | Truthfulness (generative) | 0 |
+| `coqa` | Conversational QA | 0 |
+| `cnn_dailymail` | News summarization | 1 |
 
 > **Note:** `humaneval` and `mbpp` execute model-generated code locally. You must add `--confirm_run_unsafe_code` and set `HF_ALLOW_CODE_EVAL=1`:
 > ```bash
@@ -124,11 +129,6 @@ lm_eval --model cerebras-completions \
 >   --apply_chat_template --num_fewshot 0 \
 >   --confirm_run_unsafe_code
 > ```
-| `hendrycks_math` | Competition-level math | 4 |
-| `aime24`, `aime25` | AIME math olympiad | 0 |
-| `truthfulqa_gen` | Truthfulness (generative) | 0 |
-| `coqa` | Conversational QA | 0 |
-| `cnn_dailymail` | News summarization | 1 |
 
 ### Multiple-choice tasks (`multiple_choice`) — completions endpoint only
 
@@ -176,6 +176,7 @@ lm_eval --model cerebras-completions \
 | `--limit <n>` | Cap samples per task (for quick testing) |
 | `--output_path <dir>` | Save results JSON to directory |
 | `--log_samples` | Save per-sample predictions |
+| `--confirm_run_unsafe_code` | Required for `humaneval` and `mbpp` (executes generated code) |
 
 ---
 
@@ -191,6 +192,9 @@ lm_eval --model cerebras-chat-completions \
   --output_path ./results
 
 # Knowledge + reasoning benchmarks via completions
+# Note: use a tokenizer matching your model's family.
+# For Llama-based models (llama3.1-8b, gpt-oss-120b) use NousResearch/Meta-Llama-3.1-8B.
+# For other models, find a matching HF tokenizer.
 lm_eval --model cerebras-completions \
   --model_args model=gpt-oss-120b,tokenizer=NousResearch/Meta-Llama-3.1-8B \
   --tasks mmlu,hellaswag,arc_challenge,winogrande \
