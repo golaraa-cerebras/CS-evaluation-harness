@@ -23,6 +23,8 @@ Adding New Models
 """
 
 MODEL_MAPPING = {
+    "cerebras-chat-completions": "lm_eval.models.cerebras_chatcompletion:CerebrasChatCompletion",
+    "cerebras-completions": "lm_eval.models.cerebras_chatcompletion:CerebrasCompletion",
     "anthropic-chat": "lm_eval.models.anthropic_llms:AnthropicChat",
     "anthropic-chat-completions": "lm_eval.models.anthropic_llms:AnthropicChat",
     "anthropic-completions": "lm_eval.models.anthropic_llms:AnthropicLM",
